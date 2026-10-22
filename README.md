@@ -1,6 +1,8 @@
-# Legacy PHP security backports
+# PHP 7.0/7.2 backports for CVE-2026-109618 and CVE-2026-109619
 
-Prepared PHP 7.0/7.2 source and build records for maintaining existing Ubuntu Xenial installations. The packages were deployed successfully in observed production checks on 21 October 2026.
+This repository adapts Canonical's legacy security patch for **[CVE-2026-109618](https://ubuntu.com/security/CVE-2026-109618)** and **[CVE-2026-109619](https://ubuntu.com/security/CVE-2026-109619)** to PHP 7.0.33 and PHP 7.2.34 distribution packages on Ubuntu Xenial. The goal is to address these vulnerabilities while retaining the existing PHP branches and package integration.
+
+The source patch is [`CVE-2026-109618_109619.patch`](patches/php-7.2/canonical-CVE-2026-109618_109619.patch), extracted from Canonical's PHP 7.2 ESM package for the vulnerabilities covered by [USN-8948-2](https://ubuntu.com/security/notices/USN-8948-2). This repository preserves its original, the three isolated adaptations, and the source/build records needed for subsequent maintenance. The resulting packages were deployed successfully in observed production checks on 21 October 2026; verification limits are documented below.
 
 ## Contents
 
@@ -13,11 +15,19 @@ Prepared PHP 7.0/7.2 source and build records for maintaining existing Ubuntu Xe
 
 Each branch has exactly two commits and an independent root history: **distribution baseline**, then **security adaptation**. The baseline includes upstream source and the distribution's pre-existing fixes, so those historical changes are distinguishable from the new adaptation.
 
-| Branch | Patch commit | Baseline | Patched package |
+| Source branch | Migrated patch | CVE advisories addressed | Adaptation commit |
 |---|---|---|---|
-| [php-7.0-ubuntu16.04](https://github.com/jacmkno/legacy-security-backports-for-php/tree/php-7.0-ubuntu16.04) | [Security adaptation](https://github.com/jacmkno/legacy-security-backports-for-php/commit/15ec43723b6279dc1ea47ae240056e28aca0d010) | `7.0.33-0ubuntu0.16.04.16` | `7.0.33-0ubuntu0.16.04.16+community1` |
-| [php-7.0-sury-xenial](https://github.com/jacmkno/legacy-security-backports-for-php/tree/php-7.0-sury-xenial) | [Security adaptation](https://github.com/jacmkno/legacy-security-backports-for-php/commit/ee93c8d837e5f35654de29d8e9b73c060129bc23) | `7.0.33-37` distribution recipe | `7.0.33-37+ubuntu16.04.1+deb.sury.org+1+community2` |
-| [php-7.2-sury-xenial](https://github.com/jacmkno/legacy-security-backports-for-php/tree/php-7.2-sury-xenial) | [Security adaptation](https://github.com/jacmkno/legacy-security-backports-for-php/commit/1d7db23cfce91fac0b83727700f9154c2da3a68d) | `7.2.34-8` distribution recipe | `7.2.34-8+ubuntu16.04.1+deb.sury.org+1+community2` |
+| [php-7.0-ubuntu16.04](https://github.com/jacmkno/legacy-security-backports-for-php/tree/php-7.0-ubuntu16.04) | [Canonical legacy patch](patches/php-7.2/canonical-CVE-2026-109618_109619.patch) | [CVE-2026-109618](https://ubuntu.com/security/CVE-2026-109618), [CVE-2026-109619](https://ubuntu.com/security/CVE-2026-109619) | [Ubuntu PHP 7.0 adaptation](https://github.com/jacmkno/legacy-security-backports-for-php/commit/15ec43723b6279dc1ea47ae240056e28aca0d010) |
+| [php-7.0-sury-xenial](https://github.com/jacmkno/legacy-security-backports-for-php/tree/php-7.0-sury-xenial) | [Canonical legacy patch](patches/php-7.2/canonical-CVE-2026-109618_109619.patch) | [CVE-2026-109618](https://ubuntu.com/security/CVE-2026-109618), [CVE-2026-109619](https://ubuntu.com/security/CVE-2026-109619) | [Sury PHP 7.0 adaptation](https://github.com/jacmkno/legacy-security-backports-for-php/commit/ee93c8d837e5f35654de29d8e9b73c060129bc23) |
+| [php-7.2-sury-xenial](https://github.com/jacmkno/legacy-security-backports-for-php/tree/php-7.2-sury-xenial) | [Canonical legacy patch](patches/php-7.2/canonical-CVE-2026-109618_109619.patch) | [CVE-2026-109618](https://ubuntu.com/security/CVE-2026-109618), [CVE-2026-109619](https://ubuntu.com/security/CVE-2026-109619) | [Sury PHP 7.2 adaptation](https://github.com/jacmkno/legacy-security-backports-for-php/commit/1d7db23cfce91fac0b83727700f9154c2da3a68d) |
+
+Package versions produced from those adaptations:
+
+| Branch | Baseline | Patched package |
+|---|---|---|
+| `php-7.0-ubuntu16.04` | `7.0.33-0ubuntu0.16.04.16` | `7.0.33-0ubuntu0.16.04.16+community1` |
+| `php-7.0-sury-xenial` | `7.0.33-37` distribution recipe | `7.0.33-37+ubuntu16.04.1+deb.sury.org+1+community2` |
+| `php-7.2-sury-xenial` | `7.2.34-8` distribution recipe | `7.2.34-8+ubuntu16.04.1+deb.sury.org+1+community2` |
 
 The second commit isolates CVE-2026-109618/CVE-2026-109619 changes, generated Zend VM headers, quilt records and the package revision. Review it with `git diff HEAD^ HEAD -- Zend main ext debian`. Quilt before-images/state are preserved in `.pc/`; GitHub marks these and generated VM headers as generated. PHP's original README is retained as `README.upstream.md`.
 
