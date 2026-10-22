@@ -55,3 +55,4 @@
 0055-Skip-fpm-tests-not-designed-to-be-run-as-root.patch
 0056-Add-pkg-config-m4-files-to-phpize-script.patch
 0057-In-phpize-also-copy-config.guess-config.sub-ltmain.s.patch
+community-CVE-2026-109618_109619.patch
