@@ -13,11 +13,11 @@ Prepared PHP 7.0/7.2 source and build records for maintaining existing Ubuntu Xe
 
 Each branch has exactly two commits and an independent root history: **distribution baseline**, then **security adaptation**. The baseline includes upstream source and the distribution's pre-existing fixes, so those historical changes are distinguishable from the new adaptation.
 
-| Branch | Baseline | Patched package |
-|---|---|---|
-| [php-7.0-ubuntu16.04](https://github.com/jacmkno/legacy-security-backports-for-php/tree/php-7.0-ubuntu16.04) | `7.0.33-0ubuntu0.16.04.16` | `7.0.33-0ubuntu0.16.04.16+community1` |
-| [php-7.0-sury-xenial](https://github.com/jacmkno/legacy-security-backports-for-php/tree/php-7.0-sury-xenial) | `7.0.33-37` distribution recipe | `7.0.33-37+ubuntu16.04.1+deb.sury.org+1+community2` |
-| [php-7.2-sury-xenial](https://github.com/jacmkno/legacy-security-backports-for-php/tree/php-7.2-sury-xenial) | `7.2.34-8` distribution recipe | `7.2.34-8+ubuntu16.04.1+deb.sury.org+1+community2` |
+| Branch | Patch commit | Baseline | Patched package |
+|---|---|---|---|
+| [php-7.0-ubuntu16.04](https://github.com/jacmkno/legacy-security-backports-for-php/tree/php-7.0-ubuntu16.04) | [Security adaptation](https://github.com/jacmkno/legacy-security-backports-for-php/commit/15ec43723b6279dc1ea47ae240056e28aca0d010) | `7.0.33-0ubuntu0.16.04.16` | `7.0.33-0ubuntu0.16.04.16+community1` |
+| [php-7.0-sury-xenial](https://github.com/jacmkno/legacy-security-backports-for-php/tree/php-7.0-sury-xenial) | [Security adaptation](https://github.com/jacmkno/legacy-security-backports-for-php/commit/ee93c8d837e5f35654de29d8e9b73c060129bc23) | `7.0.33-37` distribution recipe | `7.0.33-37+ubuntu16.04.1+deb.sury.org+1+community2` |
+| [php-7.2-sury-xenial](https://github.com/jacmkno/legacy-security-backports-for-php/tree/php-7.2-sury-xenial) | [Security adaptation](https://github.com/jacmkno/legacy-security-backports-for-php/commit/1d7db23cfce91fac0b83727700f9154c2da3a68d) | `7.2.34-8` distribution recipe | `7.2.34-8+ubuntu16.04.1+deb.sury.org+1+community2` |
 
 The second commit isolates CVE-2026-109618/CVE-2026-109619 changes, generated Zend VM headers, quilt records and the package revision. Review it with `git diff HEAD^ HEAD -- Zend main ext debian`. Quilt before-images/state are preserved in `.pc/`; GitHub marks these and generated VM headers as generated. PHP's original README is retained as `README.upstream.md`.
 
