@@ -1,0 +1,8 @@
+/private/
+/work/
+/artifacts/
+/objective-php-patch-*.md
+/packaging/BUILD_ENVIRONMENT.md
+/packaging/toolchain/
+__pycache__/
+*.pyc
