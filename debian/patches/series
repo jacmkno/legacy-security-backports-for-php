@@ -129,3 +129,4 @@ CVE-2020-7064.patch
 CVE-2020-7066.patch
 CVE-2019-11048.patch
 CVE-2020-7070.patch
+php-7.0.33.patch
