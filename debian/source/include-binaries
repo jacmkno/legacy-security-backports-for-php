@@ -1,0 +1,6 @@
+debian/patches/use_updated_install-pear-nozlib.phar.patch
+ext/exif/tests/bug77563.jpg
+ext/exif/tests/bug77540.jpg
+ext/exif/tests/bug78256.jpg
+ext/exif/tests/bug78222.jpg
+

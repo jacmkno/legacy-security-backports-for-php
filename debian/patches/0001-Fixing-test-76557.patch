@@ -1,0 +1,25 @@
+From 84b19434a87bfd45e0541bf5c01fca11ca060d08 Mon Sep 17 00:00:00 2001
+From: "Leonidas S. Barbosa" <leo.barbosa@canonical.com>
+Date: Mon, 13 Jan 2020 10:36:22 -0300
+Subject: [PATCH] Fixing test 76557.phpt
+
+---
+ ext/exif/tests/bug76557.phpt | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/ext/exif/tests/bug76557.phpt b/ext/exif/tests/bug76557.phpt
+index 4553b627..4b7c5ec8 100644
+--- a/ext/exif/tests/bug76557.phpt
++++ b/ext/exif/tests/bug76557.phpt
+@@ -70,7 +70,7 @@ Warning: exif_read_data(bug76557.jpg): Process tag(x3030=UndefinedTa): Illegal f
+ 
+ Warning: exif_read_data(bug76557.jpg): Process tag(x3030=UndefinedTa): Illegal format code 0x3030, suppose BYTE in %sbug76557.php on line %d
+ 
+-Warning: exif_read_data(bug76557.jpg): Process tag(x3030=UndefinedTa): Illegal pointer offset(x30303030 + x30303030 = x60606060 > x00EE) in %sbug76557.php on line %d
++Warning: exif_read_data(bug76557.jpg): Process tag(x3030=UndefinedTa): Illegal pointer offset(x30303030 + x30303030 = x60606060 > x00D4) in %sbug76557.php on line %d
+ 
+ Warning: exif_read_data(bug76557.jpg): File structure corrupted in %sbug76557.php on line %d
+ 
+-- 
+2.22.0
+

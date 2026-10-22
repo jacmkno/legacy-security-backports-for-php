@@ -1,0 +1,61 @@
+From: andrewnester <andrew.nester.dev@gmail.com>
+Description: Fixed #73959 - lastInsertId fails to throw an exception in pdsql
+Origin: upstream, http://git.php.net/?p=php-src.git;a=commit;h=21ac79e94bd0335bf885b807e09c4d86d75d776a
+Bug: https://bugs.php.net/bug.php?id=73959
+Bug-Ubuntu: https://bugs.launchpad.net/ubuntu/+source/php7.0/+bug/1658289
+
+---
+
+--- a/NEWS
++++ b/NEWS
+@@ -54,6 +54,10 @@
+   . Fixed bug #72931 (PDO_FIREBIRD with Firebird 3.0 not work on returning
+     statement). (Dorin Marcoci)
+ 
++- PDO_PgSQL:
++  . Fixed bug #73959 (lastInsertId fails to throw an exception for wrong 
++    sequence name). (andrewnester)
++
+ - Phar:
+   . Fixed bug #73773 (Seg fault when loading hostile phar). (Stas)
+   . Fixed bug #73768 (Memory corruption when loading hostile phar). (Stas)
+--- a/ext/pdo_pgsql/pgsql_driver.c
++++ b/ext/pdo_pgsql/pgsql_driver.c
+@@ -391,7 +391,6 @@
+ 			(void)PQexec(H->server, "ROLLBACK TO SAVEPOINT _php_lastid_savepoint");
+ 		}
+ 		pdo_pgsql_error(dbh, status, pdo_pgsql_sqlstate(res));
+-		*len = spprintf(&id, 0, ZEND_LONG_FMT, (zend_long) H->pgoid);
+ 	}
+ 
+ 	if (savepoint) {
+--- /dev/null
++++ b/ext/pdo_pgsql/tests/bug73959.phpt
+@@ -0,0 +1,27 @@
++--TEST--
++Bug #73959 (lastInsertId fails to throw an exception)
++--SKIPIF--
++<?php
++if (!extension_loaded('pdo') || !extension_loaded('pdo_pgsql')) die('skip not loaded');
++require dirname(__FILE__) . '/../../../ext/pdo/tests/pdo_test.inc';
++require dirname(__FILE__) . '/config.inc';
++PDOTest::skip();
++?>
++--FILE--
++<?php
++require dirname(__FILE__) . '/../../../ext/pdo/tests/pdo_test.inc';
++require dirname(__FILE__) . '/config.inc';
++$db = PDOTest::test_factory(dirname(__FILE__) . '/common.phpt');
++$db->setAttribute(PDO::ATTR_PERSISTENT, false);
++$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
++$db->setAttribute(PDO::PGSQL_ATTR_DISABLE_PREPARES, true);
++
++try {
++    $db->lastInsertId('nonexistent_seq');
++    echo "Error: No exception thrown";
++} catch (PDOException $e) {
++    echo "Success: Exception thrown";
++}
++?>
++--EXPECT--
++Success: Exception thrown

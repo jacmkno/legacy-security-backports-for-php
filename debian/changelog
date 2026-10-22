@@ -1,0 +1,1469 @@
+php7.0 (7.0.33-0ubuntu0.16.04.16) xenial-security; urgency=medium
+
+  * SECURITY UPDATE: Possibly forge cookie
+    - debian/patches/CVE-2020-7070.patch: do not decode cookie names anymore
+      in main/php_variables.c, tests/basic/022.phpt, tests/basic/023.phpt,
+      tests/basic/bug79699.phpt.
+    - CVE-2020-7070
+
+ -- Leonidas S. Barbosa <leo.barbosa@canonical.com>  Wed, 07 Oct 2020 14:47:16 -0300
+
+php7.0 (7.0.33-0ubuntu0.16.04.15) xenial-security; urgency=medium
+
+  * SECURITY UPDATE: Denial of service through oversized memory allocated
+    - debian/patches/CVE-2019-11048.patch: changes types int to size_t
+      in main/rfc1867.c.
+    - CVE-2019-11048
+
+ -- Leonidas S. Barbosa <leo.barbosa@canonical.com>  Tue, 26 May 2020 10:52:55 -0300
+
+php7.0 (7.0.33-0ubuntu0.16.04.14) xenial-security; urgency=medium
+
+  * SECURITY UDPATE: Null dereference pointer
+    - debian/patches/CVE-2020-7062.patch: avoid null dereference in
+      ext/session/session.c, ext/session/tests/bug79221.phpt.
+    - CVE-2020-7062
+  * SECURITY UPDATE: Lax permissions on files added to tar with Phar
+    - debian/patches/CVE-2020-7063.patch: enforce correct permissions
+      for files add to tar with Phar in ext/phar/phar_object.c,
+      ext/phar/tests/bug79082.phpt, ext/phar/tests/test79082*.
+    - CVE-2020-7063
+  * SECURITY UPDATE: Read one byte of uninitialized memory
+    - debian/patches/CVE-2020-7064.patch: check length in
+      exif_process_TIFF_in_JPEG to avoid read uninitialized memory
+      ext/exif/exif.c, ext/exif/tests/bug79282.phpt.
+    - debian/patches/0001-Fix-test-bug79282.patch: fix test in
+      ext/exif/tests/bug79282.phpt.
+    - CVE-2020-7064
+  * SECURITY UPDATE: Truncated url due \0
+    - debian/patches/CVE-2020-7066.patch: check for get_headers
+      not accepting \0 in ext/standard/url.c.
+    - CVE-2020-7066
+
+ -- Leonidas S. Barbosa <leo.barbosa@canonical.com>  Thu, 09 Apr 2020 11:27:04 -0300
+
+php7.0 (7.0.33-0ubuntu0.16.04.12) xenial-security; urgency=medium
+
+  * SECURITY REGRESSION: fpm patch for CVE-2015-9253
+    caused a regression OOM
+    - removing CVE-2015-9253.patch.
+
+ -- Leonidas S. Barbosa <leo.barbosa@canonical.com>  Wed, 19 Feb 2020 10:47:31 -0300
+
+php7.0 (7.0.33-0ubuntu0.16.04.11) xenial-security; urgency=medium
+
+  * SECURITY UPDATE: Denial of service
+    - debian/patches/CVE-2015-9253.patch: directly listen
+      on socket, instead duping it to STDIN in
+      sapi/fpm/fpm/fpm_children.c, sapi/fpm/fpm_stdio.c,
+      and added tests to sapi/fpm/tests/bug73342-nonblocking-stdio.phpt.
+    - CVE-2015-9253
+  * SECURITY UPDATE: Out of bounds read
+    - debian/patches/CVE-2020-7059.patch: fix OOB read in
+      php_strip_tags_ex in ext/standard/string.c and added test
+      ext/standard/tests/file/bug79099.phpt.
+    - CVE-2020-7059
+  * SECURITY UPDATE: Buffer-overflow
+    - debian/patches/CVE-2020-7060.patch: fix adding a check function
+      is_in_cp950_pua in  ext/mbstring/libmbfl/filters/mbfilter_big5.c
+      and added test ext/mbstring/tests/bug79037.phpt.
+    - CVE-2020-7060
+
+ -- Leonidas S. Barbosa <leo.barbosa@canonical.com>  Tue, 11 Feb 2020 12:42:36 -0300
+
+php7.0 (7.0.33-0ubuntu0.16.04.9) xenial-security; urgency=medium
+
+  * SECURITY UPDATE: silently truncates
+    a class after a null byte
+    - debian/patches/CVE-2019-11045.patch:  not accept
+      arbitrary strings in ext/spl/spl_directory.c,
+      ext/spl/tests/bug78863.phpt.
+    - CVE-2019-11045
+  * SECURITY UPDATE: Buffer underflow
+    - debian/patches/CVE-2019-11046.patch: not rely on `isdigit()`
+      to detect digits in ext/bcmath/libbcmath/src/str2num.c,
+      ext/bcmath/tests/bug78878.phpt.
+    - CVE-2019-11046
+  * SECURITY UPDATE: Heap-buffer-overflow
+    - debian/patches/CVE-2019-11047.patch: fix in ext/exif/exif.c,
+      ext/exif/tests/bug78910.phpt.
+    - CVE-2019-11047
+  * SECURITY UPDATE: Use-after-free
+    - debian/patches/CVE-2019-11050.patch: fix in
+      ext/exif/exif.c, ext/exif/tests/bug78793.phpt.
+    - CVE-2019-11050
+  * fixing test bug76557
+    - debian/patches/0001-Fixing-test-76557.patch.
+
+ -- Leonidas S. Barbosa <leo.barbosa@canonical.com>  Fri, 10 Jan 2020 14:09:31 -0300
+
+php7.0 (7.0.33-0ubuntu0.16.04.7) xenial-security; urgency=medium
+
+  * SECURITY UPDATE: RCE via env_path_info underflow
+    - debian/patches/CVE-2019-11043.patch: add check in
+      sapi/fpm/fpm/fpm_main.c.
+    - CVE-2019-11043
+
+ -- Marc Deslauriers <marc.deslauriers@ubuntu.com>  Thu, 24 Oct 2019 14:09:21 -0400
+
+php7.0 (7.0.33-0ubuntu0.16.04.6) xenial-security; urgency=medium
+
+  * SECURITY UPDATE: Heap-buffer-overflow
+    - debian/patches/CVE-2019-11041.patch: check Thumbnail.size in order
+      to avoid an overflow in ext/exif.exif.c and adding test to
+      ext/exif/tests/bug78222.phpt.
+    - CVE-2019-11041
+  * SECURITY UPDATE: Heap-buffer-overflow
+    - debian/patches/CVE-2019-11042.patch: check ByteCount in order to
+      avoid an overflow in ext/exif/exif.c and adding tests to
+      ext/exif/tests/bug78256.phpt.
+    - CVE-2019-11042
+
+ -- Leonidas S. Barbosa <leo.barbosa@canonical.com>  Mon, 12 Aug 2019 15:07:12 -0300
+
+php7.0 (7.0.33-0ubuntu0.16.04.5) xenial-security; urgency=medium
+
+  * SECURITY UPDATE: overflow in exif_process_IFD_TAG
+    - debian/patches/CVE-2019-11036.patch: check dir_entry in
+      ext/exif/exif.c.
+    - CVE-2019-11036
+  * SECURITY UPDATE: out-of-bounds read in _php_iconv_mime_decode()
+    - debian/patches/CVE-2019-11039.patch: add an extra check in
+      ext/iconv/iconv.c.
+    - CVE-2019-11039
+  * SECURITY UPDATE: heap-buffer-overflow on php_jpg_get16
+    - debian/patches/CVE-2019-11040.patch: add an extra check in
+      ext/exif/exif.c.
+    - CVE-2019-11040
+
+ -- Marc Deslauriers <marc.deslauriers@ubuntu.com>  Tue, 04 Jun 2019 13:13:15 -0400
+
+php7.0 (7.0.33-0ubuntu0.16.04.4) xenial-security; urgency=medium
+
+  * SECURITY UPDATE: Heap-buffer-overflow in php_ifd_get32s
+    - debian/patches/CVE-2019-11034.patch: check size in ext/exif/exif.c.
+    - CVE-2019-11034
+  * SECURITY UPDATE: Heap-buffer-overflow in exif_iif_add_value in EXIF
+    - debian/patches/CVE-2019-11035-1.patch: add checks to ext/exif/exif.c.
+    - debian/patches/CVE-2019-11035-2.patch: add casts to ext/exif/exif.c.
+    - debian/patches/CVE-2019-11035-3.patch: fix typo in ext/exif/exif.c.
+    - CVE-2019-11035
+
+ -- Marc Deslauriers <marc.deslauriers@ubuntu.com>  Thu, 18 Apr 2019 11:25:19 -0400
+
+php7.0 (7.0.33-0ubuntu0.16.04.3) xenial-security; urgency=medium
+
+  * SECURITY UPDATE: Unauthorized users access
+    - debian/patches/CVE-2019-9637.patch: fix in
+      main/streams/plain_wrapper.c.
+    - CVE-2019-9637
+  * SECURITY UPDATE: Invalid read in exif_process_IFD_MAKERNOTE
+    - debian/patches/CVE-2019-9638-and-CVE-2019-9639-*.patch: fix in
+      ext/exif/exif.c, added tests in ext/exif/tests/bug77563.jpg,
+      ext/exif/tests/bug77563.phpt.
+    - CVE-2019-9638
+    - CVE-2019-9639
+  * SECURITY UPDATE: Invalid read
+    - debian/patches/CVE-2019-9640.patch: fix in
+      ext/exif/exif.c, added tests in ext/exif/tests/bug77540.jpg,
+      ext/exif/tests/bug77540.phpt.
+    - CVE-2019-9640
+  * SECURITY UPDATE: Unitialized read
+    - debian/patches/CVE-2019-9641.patch: fix in ext/exif/exif.c.
+    - CVE-2019-9641
+  * SECURITY UPDATE: Buffer overflow
+    - debian/patches/CVE-2019-9675.patch: fix in
+      ext/phar/tar.c, added tests in ext/phar/tests/bug71488.phpt,
+      ext/phar/tests/bug77586,phpt, ext/phar/tests/bug77586/files/*.
+
+ -- Leonidas S. Barbosa <leo.barbosa@canonical.com>  Thu, 21 Mar 2019 09:49:35 -0300
+
+php7.0 (7.0.33-0ubuntu0.16.04.2) xenial-security; urgency=medium
+
+  * SECURITY UPDATE: invalid memory access in xmlrpc_decode()
+    - debian/patches/CVE-2019-9020.patch: check length in
+      ext/xmlrpc/libxmlrpc/xml_element.c, added test to
+      ext/xmlrpc/tests/bug77242.phpt.
+    - CVE-2019-9020
+  * SECURITY UPDATE: buffer over-read in PHAR extension
+    - debian/patches/CVE-2019-9021.patch: properly calculate position in
+      ext/phar/phar.c, added test to ext/phar/tests/bug77247.phpt.
+    - CVE-2019-9021
+  * SECURITY UPDATE: buffer over-read in dns_get_record
+    - debian/patches/CVE-2019-9022-pre.patch: fix DNS_CAA record results
+      handling in ext/standard/dns.c,
+      ext/standard/tests/network/dns_get_record_caa.phpt.
+    - debian/patches/CVE-2019-9022.patch: check length in
+      ext/standard/dns.c.
+    - CVE-2019-9022
+  * SECURITY UPDATE: buffer over-reads in mbstring regex functions
+    - debian/patches/CVE-2019-9023-1.patch: don't read past buffer in
+      ext/mbstring/oniguruma/regparse.c, added test to
+      ext/mbstring/tests/bug77370.phpt.
+    - debian/patches/CVE-2019-9023-2.patch: check bounds in
+      ext/mbstring/oniguruma/regcomp.c, added test to
+      ext/mbstring/tests/bug77371.phpt.
+    - debian/patches/CVE-2019-9023-3.patch: add length checks to
+      ext/mbstring/oniguruma/enc/unicode.c,
+      ext/mbstring/oniguruma/regcomp.c, ext/mbstring/oniguruma/regparse.c,
+      ext/mbstring/oniguruma/regparse.h, added test to
+      ext/mbstring/tests/bug77371.phpt, ext/mbstring/tests/bug77381.phpt.
+    - debian/patches/CVE-2019-9023-4.patch: add new bounds checks to
+      ext/mbstring/oniguruma/enc/utf16_be.c,
+      ext/mbstring/oniguruma/enc/utf16_le.c,
+      ext/mbstring/oniguruma/enc/utf32_be.c,
+      ext/mbstring/oniguruma/enc/utf32_le.c, added test to
+      ext/mbstring/tests/bug77418.phpt.
+    - CVE-2019-9023
+  * SECURITY UPDATE: buffer over-read in xmlrpc_decode()
+    - debian/patches/CVE-2019-9024.patch: fix variable size in
+      ext/xmlrpc/libxmlrpc/base64.c, added test to
+      ext/xmlrpc/tests/bug77380.phpt.
+    - CVE-2019-9024
+
+ -- Marc Deslauriers <marc.deslauriers@ubuntu.com>  Tue, 05 Mar 2019 07:43:31 -0500
+
+php7.0 (7.0.33-0ubuntu0.16.04.1) xenial-security; urgency=medium
+
+  * SECURITY UPDATE: Update to 7.0.33 to fix security issues
+    - CVE-2018-19518
+    - CVE-2018-19935
+
+ -- Mike Salvatore <mike.salvatore@canonical.com>  Thu, 07 Feb 2019 10:52:32 -0400
+
+php7.0 (7.0.32-0ubuntu0.16.04.1) xenial-security; urgency=medium
+
+  * SECURITY UPDATE: Update to 7.0.32 to fix security issues
+    - CVE-2018-14851
+    - CVE-2018-14883
+
+ -- Marc Deslauriers <marc.deslauriers@ubuntu.com>  Thu, 13 Sep 2018 09:53:39 -0400
+
+php7.0 (7.0.30-0ubuntu0.16.04.1) xenial-security; urgency=medium
+
+  * SECURITY UPDATE: Update to 7.0.30 to fix security issues
+    - CVE-2018-10545, CVE-2018-10546, CVE-2018-10547, CVE-2018-10548,
+      CVE-2018-10549
+
+ -- Marc Deslauriers <marc.deslauriers@ubuntu.com>  Wed, 09 May 2018 13:31:14 -0400
+
+php7.0 (7.0.28-0ubuntu0.16.04.1) xenial-security; urgency=medium
+
+  * New upstream release (7.0.28)
+    - LP: #1744148
+    - CVE-2018-5712
+    - CVE-2018-7584
+
+ -- Nishanth Aravamudan <nish.aravamudan@canonical.com>  Wed, 14 Mar 2018 15:22:51 -0700
+
+php7.0 (7.0.25-0ubuntu0.16.04.1) xenial; urgency=medium
+
+  * New upstream release (7.0.25)
+    - LP: #1724896
+    - LP: #1721607
+
+ -- Nishanth Aravamudan <nish.aravamudan@canonical.com>  Wed, 01 Nov 2017 10:18:38 -0700
+
+php7.0 (7.0.22-0ubuntu0.16.04.1) xenial-security; urgency=medium
+
+  * New upstream release (7.0.22)
+    - LP: #1709489
+
+ -- Nishanth Aravamudan <nish.aravamudan@canonical.com>  Tue, 08 Aug 2017 15:14:19 -0700
+
+php7.0 (7.0.18-0ubuntu0.16.04.1) xenial; urgency=medium
+
+  * New upstream release 7.0.18
+    - LP: #1686237
+    - LP: #1674892
+    - Refresh patches for new upstream release
+  * Drop:
+    - debian/patches/0053-Fix-pdo_pgsql.patch: Fixed #73959 - lastInsertId
+      fails to throw an exception in pdsql.  Thanks to andrewnester
+      <andrew.nester.dev@gmail.com>.  Closes LP #1658289.
+      [ Fixed upstream in 7.0.16, prior changelog referred to wrong
+        patchfile ]
+    - SECURITY REGRESSION: large mysql requests broken (LP #1668017)
+      + debian/patches/fix_74021.patch: fix fetch_array with more than
+        MEDIUMBLOB in ext/mysqlnd/mysqlnd_wireprotocol.c, added tests to
+        ext/mysqli/tests/bug73800.phpt, ext/mysqli/tests/bug74021.phpt.
+      [ Fixed upstream in 7.0.17 ]
+  * d/control{,.in}: Backport "libapache2-mod-phpX.Y now recommends
+    apache2 package (as this is what most people want anyway)" from
+    Debian 8.0.7-3 (LP: #1689646).
+
+ -- Nishanth Aravamudan <nish.aravamudan@canonical.com>  Wed, 10 May 2017 09:19:03 -0700
+
+php7.0 (7.0.15-0ubuntu0.16.04.4) xenial-security; urgency=medium
+
+  * SECURITY REGRESSION: large mysql requests broken (LP: #1668017)
+    - debian/patches/fix_74021.patch: fix fetch_array with more than
+      MEDIUMBLOB in ext/mysqlnd/mysqlnd_wireprotocol.c, added tests to
+      ext/mysqli/tests/bug73800.phpt, ext/mysqli/tests/bug74021.phpt.
+
+ -- Marc Deslauriers <marc.deslauriers@ubuntu.com>  Wed, 01 Mar 2017 10:55:45 -0500
+
+php7.0 (7.0.15-0ubuntu0.16.04.2) xenial-security; urgency=medium
+
+  * No change rebuild in the -security pocket.
+
+ -- Marc Deslauriers <marc.deslauriers@ubuntu.com>  Thu, 23 Feb 2017 08:42:45 -0500
+
+php7.0 (7.0.15-0ubuntu0.16.04.1) xenial; urgency=medium
+
+  * New upstream release
+    - LP: #1663405
+    - Refresh patches for new upstream release.
+  * debian/patches/0050-Fix-pdo_pgsql.patch: Fixed #73959 - lastInsertId
+    fails to throw an exception in pdsql.  Thanks to andrewnester
+    <andrew.nester.dev@gmail.com>.  Closes LP: #1658289.
+
+ -- Nishanth Aravamudan <nish.aravamudan@canonical.com>  Tue, 14 Feb 2017 14:53:34 -0800
+
+php7.0 (7.0.13-0ubuntu0.16.04.1) xenial; urgency=medium
+
+  * New upstream release
+    - LP: #1645431
+    - Refresh patches for new upstream release.
+  * Drop:
+    - SECURITY UPDATE: proxy request header vulnerability (httpoxy)
+      + debian/patches/CVE-2016-5385.patch: only use HTTP_PROXY from the
+        local environment in ext/standard/basic_functions.c, main/SAPI.c,
+        main/php_variables.c.
+      + CVE-2016-5385
+      [ Fixed in 7.0.9 ]
+    - SECURITY UPDATE: inadequate error handling in bzread()
+      + debian/patches/CVE-2016-5399.patch: do not allow reading past error
+        read in ext/bz2/bz2.c.
+      + CVE-2016-5399
+      [ Fixed in 7.0.9 ]
+    - SECURITY UPDATE: integer overflow in the virtual_file_ex function
+      + debian/patches/CVE-2016-6289.patch: properly check path_length in
+        Zend/zend_virtual_cwd.c.
+      + CVE-2016-6289
+      [ Fixed in 7.0.9 ]
+    - SECURITY UPDATE: use after free in unserialize() with unexpected
+      session deserialization
+      + debian/patches/CVE-2016-6290.patch: destroy var_hash properly in
+        ext/session/session.c, added test to ext/session/tests/bug72562.phpt.
+      + CVE-2016-6290
+      [ Fixed in 7.0.9 ]
+    - SECURITY UPDATE: out of bounds read in exif_process_IFD_in_MAKERNOTE
+      + debian/patches/CVE-2016-6291.patch: add more bounds checks to
+        ext/exif/exif.c.
+      + CVE-2016-6291
+      [ Fixed in 7.0.9 ]
+    - SECURITY UPDATE: NULL pointer dereference in exif_process_user_comment
+      + debian/patches/CVE-2016-6292.patch: properly handle encoding in
+        ext/exif/exif.c.
+      + CVE-2016-6292
+      [ Fixed in 7.0.9 ]
+    - SECURITY UPDATE: locale_accept_from_http out-of-bounds access
+      + debian/patches/CVE-2016-6294.patch: check length in
+        ext/intl/locale/locale_methods.c, added test to
+        ext/intl/tests/bug72533.phpt.
+      + CVE-2016-6294
+      [ Fixed in 7.0.9 ]
+    - SECURITY UPDATE: use after free vulnerability in SNMP with GC and
+      unserialize()
+      + debian/patches/CVE-2016-6295.patch: add new handler to
+        ext/snmp/snmp.c, add test to ext/snmp/tests/bug72479.phpt.
+      + CVE-2016-6295
+      [ Fixed in 7.0.9 ]
+    - SECURITY UPDATE: heap buffer overflow in simplestring_addn
+      + debian/patches/CVE-2016-6296.patch: prevent overflows in
+        ext/xmlrpc/libxmlrpc/simplestring.*.
+      + CVE-2016-6296
+      [ Fixed in 7.0.9 ]
+    - SECURITY UPDATE: integer overflow in php_stream_zip_opener
+      + debian/patches/CVE-2016-6297.patch: use size_t in
+        ext/zip/zip_stream.c.
+      + CVE-2016-6297
+      [ Fixed in 7.0.9 ]
+    - debian/patches/fix_exif_tests.patch: fix exif test results after
+      security changes.
+      [ Fixed in 7.0.9 ]
+    - SECURITY UPDATE: denial of service or code execution via crafted
+      serialized data
+      + debian/patches/CVE-2016-7124.patch: fix unserializing logic in
+        ext/session/session.c, ext/standard/var_unserializer.c*,
+        ext/wddx/wddx.c, added tests to
+        ext/standard/tests/serialize/bug72663.phpt,
+        ext/standard/tests/serialize/bug72663_2.phpt,
+        ext/standard/tests/serialize/bug72663_3.phpt.
+      + CVE-2016-7124
+      [ Fixed in 7.0.10 ]
+    - SECURITY UPDATE: arbitrary-type session data injection
+      + debian/patches/CVE-2016-7125.patch: consume data even if not storing
+        in ext/session/session.c, added test to
+        ext/session/tests/bug72681.phpt.
+      + CVE-2016-7125
+      [ Fixed in 7.0.10 ]
+    - SECURITY UPDATE: denial of service and possible code execution in
+      imagegammacorrect function
+      + debian/patches/CVE-2016-7127.patch: check gamma values in
+        ext/gd/gd.c, added test to ext/gd/tests/bug72730.phpt.
+      + CVE-2016-7127
+      [ Fixed in 7.0.10 ]
+    - SECURITY UPDATE: information disclosure via exif_process_IFD_in_TIFF
+      + debian/patches/CVE-2016-7128.patch: properly handle thumbnails in
+        ext/exif/exif.c.
+      + CVE-2016-7128
+      [ Fixed in 7.0.10 ]
+    - SECURITY UPDATE: denial of service and possible code execution via
+      invalid ISO 8601 time value
+      + debian/patches/CVE-2016-7129.patch: properly handle strings in
+        ext/wddx/wddx.c, added test to ext/wddx/tests/bug72749.phpt.
+      + CVE-2016-7129
+      [ Fixed in 7.0.10 ]
+    - SECURITY UPDATE: denial of service and possible code execution via
+      invalid base64 binary value
+      + debian/patches/CVE-2016-7130.patch: properly handle string in
+        ext/wddx/wddx.c, added test to ext/wddx/tests/bug72750.phpt.
+      + CVE-2016-7130
+      [ Fixed in 7.0.10 ]
+    - SECURITY UPDATE: denial of service and possible code execution via
+      malformed wddxPacket XML document
+      + debian/patches/CVE-2016-7131.patch: added checks to ext/wddx/wddx.c,
+        added tests to ext/wddx/tests/bug72790.phpt,
+        ext/wddx/tests/bug72799.phpt.
+      + CVE-2016-7131
+      + CVE-2016-7132
+      [ Fixed in 7.0.10 ]
+    - SECURITY UPDATE: denial of service and possible code execution via
+      long pathname
+      + debian/patches/CVE-2016-7133.patch: fix memory allocator in
+        Zend/zend_alloc.c.
+      + CVE-2016-7133
+      [ Fixed in 7.0.10 ]
+    - SECURITY UPDATE: denial of service and possible code execution via
+      long string and curl_escape call
+      + debian/patches/CVE-2016-7134.patch: check both curl_escape and
+        curl_unescape in ext/curl/interface.c.
+      + CVE-2016-7134
+      [ Fixed in 7.0.10 ]
+    - SECURITY UPDATE: denial of service and possible code execution via
+      crafted field metadata in MySQL driver
+      + debian/patches/CVE-2016-7412.patch: validate field length in
+        ext/mysqlnd/mysqlnd_wireprotocol.c.
+      + CVE-2016-7412
+      [ Fixed in 7.0.11 ]
+    - SECURITY UPDATE: denial of service and possible code execution via
+      malformed wddxPacket XML document
+      + debian/patches/CVE-2016-7413.patch: fixed use-after-free in
+        ext/wddx/wddx.c, added test to ext/wddx/tests/bug72860.phpt.
+      + CVE-2016-7413
+      [ Fixed in 7.0.11 ]
+    - SECURITY UPDATE: denial of service and possible code execution via
+      crafted PHAR archive
+      + debian/patches/CVE-2016-7414.patch: validate signatures in
+        ext/phar/util.c, ext/phar/zip.c.
+      + CVE-2016-7414
+      [ Fixed in 7.0.11 ]
+    - SECURITY UPDATE: denial of service and possible code execution via
+      MessageFormatter::formatMessage call with a long first argument
+      + debian/patches/CVE-2016-7416.patch: added locale length check to
+        ext/intl/msgformat/msgformat_format.c.
+      + CVE-2016-7416
+      [ Fixed in 7.0.11 ]
+    - SECURITY UPDATE: denial of service or code execution via crafted
+      serialized data
+      + debian/patches/CVE-2016-7417.patch: added type check to
+        ext/spl/spl_array.c, added test to ext/spl/tests/bug73029.phpt, fix
+        test in ext/spl/tests/bug70068.phpt.
+      + CVE-2016-7417
+      [ Fixed in 7.0.11 ]
+    - SECURITY UPDATE: denial of service and possible code execution via
+      malformed wddxPacket XML document
+      + debian/patches/CVE-2016-7418.patch: fix out-of-bounds read in
+        ext/wddx/wddx.c, added test to ext/wddx/tests/bug73065.phpt.
+      + CVE-2016-7418
+      [ Fixed in 7.0.11 ]
+
+ -- Nishanth Aravamudan <nish.aravamudan@canonical.com>  Mon, 28 Nov 2016 12:24:57 -0800
+
+php7.0 (7.0.8-0ubuntu0.16.04.3) xenial-security; urgency=medium
+
+  * SECURITY UPDATE: denial of service or code execution via crafted
+    serialized data
+    - debian/patches/CVE-2016-7124.patch: fix unserializing logic in
+      ext/session/session.c, ext/standard/var_unserializer.c*,
+      ext/wddx/wddx.c, added tests to
+      ext/standard/tests/serialize/bug72663.phpt,
+      ext/standard/tests/serialize/bug72663_2.phpt,
+      ext/standard/tests/serialize/bug72663_3.phpt.
+    - CVE-2016-7124
+  * SECURITY UPDATE: arbitrary-type session data injection
+    - debian/patches/CVE-2016-7125.patch: consume data even if not storing
+      in ext/session/session.c, added test to
+      ext/session/tests/bug72681.phpt.
+    - CVE-2016-7125
+  * SECURITY UPDATE: denial of service and possible code execution in
+    imagegammacorrect function
+    - debian/patches/CVE-2016-7127.patch: check gamma values in
+      ext/gd/gd.c, added test to ext/gd/tests/bug72730.phpt.
+    - CVE-2016-7127
+  * SECURITY UPDATE: information disclosure via exif_process_IFD_in_TIFF
+    - debian/patches/CVE-2016-7128.patch: properly handle thumbnails in
+      ext/exif/exif.c.
+    - CVE-2016-7128
+  * SECURITY UPDATE: denial of service and possible code execution via
+    invalid ISO 8601 time value
+    - debian/patches/CVE-2016-7129.patch: properly handle strings in
+      ext/wddx/wddx.c, added test to ext/wddx/tests/bug72749.phpt.
+    - CVE-2016-7129
+  * SECURITY UPDATE: denial of service and possible code execution via
+    invalid base64 binary value
+    - debian/patches/CVE-2016-7130.patch: properly handle string in
+      ext/wddx/wddx.c, added test to ext/wddx/tests/bug72750.phpt.
+    - CVE-2016-7130
+  * SECURITY UPDATE: denial of service and possible code execution via
+    malformed wddxPacket XML document
+    - debian/patches/CVE-2016-7131.patch: added checks to ext/wddx/wddx.c,
+      added tests to ext/wddx/tests/bug72790.phpt,
+      ext/wddx/tests/bug72799.phpt.
+    - CVE-2016-7131
+    - CVE-2016-7132
+  * SECURITY UPDATE: denial of service and possible code execution via
+    long pathname
+    - debian/patches/CVE-2016-7133.patch: fix memory allocator in
+      Zend/zend_alloc.c.
+    - CVE-2016-7133
+  * SECURITY UPDATE: denial of service and possible code execution via
+    long string and curl_escape call
+    - debian/patches/CVE-2016-7134.patch: check both curl_escape and
+      curl_unescape in ext/curl/interface.c.
+    - CVE-2016-7134
+  * SECURITY UPDATE: denial of service and possible code execution via
+    crafted field metadata in MySQL driver
+    - debian/patches/CVE-2016-7412.patch: validate field length in
+      ext/mysqlnd/mysqlnd_wireprotocol.c.
+    - CVE-2016-7412
+  * SECURITY UPDATE: denial of service and possible code execution via
+    malformed wddxPacket XML document
+    - debian/patches/CVE-2016-7413.patch: fixed use-after-free in
+      ext/wddx/wddx.c, added test to ext/wddx/tests/bug72860.phpt.
+    - CVE-2016-7413
+  * SECURITY UPDATE: denial of service and possible code execution via
+    crafted PHAR archive
+    - debian/patches/CVE-2016-7414.patch: validate signatures in
+      ext/phar/util.c, ext/phar/zip.c.
+    - CVE-2016-7414
+  * SECURITY UPDATE: denial of service and possible code execution via
+    MessageFormatter::formatMessage call with a long first argument
+    - debian/patches/CVE-2016-7416.patch: added locale length check to
+      ext/intl/msgformat/msgformat_format.c.
+    - CVE-2016-7416
+  * SECURITY UPDATE: denial of service or code execution via crafted
+    serialized data
+    - debian/patches/CVE-2016-7417.patch: added type check to
+      ext/spl/spl_array.c, added test to ext/spl/tests/bug73029.phpt, fix
+      test in ext/spl/tests/bug70068.phpt.
+    - CVE-2016-7417
+  * SECURITY UPDATE: denial of service and possible code execution via
+    malformed wddxPacket XML document
+    - debian/patches/CVE-2016-7418.patch: fix out-of-bounds read in
+      ext/wddx/wddx.c, added test to ext/wddx/tests/bug73065.phpt.
+    - CVE-2016-7418
+
+ -- Marc Deslauriers <marc.deslauriers@ubuntu.com>  Mon, 03 Oct 2016 13:02:19 -0400
+
+php7.0 (7.0.8-0ubuntu0.16.04.2) xenial-security; urgency=medium
+
+  * SECURITY UPDATE: proxy request header vulnerability (httpoxy)
+    - debian/patches/CVE-2016-5385.patch: only use HTTP_PROXY from the
+      local environment in ext/standard/basic_functions.c, main/SAPI.c,
+      main/php_variables.c.
+    - CVE-2016-5385
+  * SECURITY UPDATE: inadequate error handling in bzread()
+    - debian/patches/CVE-2016-5399.patch: do not allow reading past error
+      read in ext/bz2/bz2.c.
+    - CVE-2016-5399
+  * SECURITY UPDATE: integer overflow in the virtual_file_ex function
+    - debian/patches/CVE-2016-6289.patch: properly check path_length in
+      Zend/zend_virtual_cwd.c.
+    - CVE-2016-6289
+  * SECURITY UPDATE: use after free in unserialize() with unexpected
+    session deserialization
+    - debian/patches/CVE-2016-6290.patch: destroy var_hash properly in
+      ext/session/session.c, added test to ext/session/tests/bug72562.phpt.
+    - CVE-2016-6290
+  * SECURITY UPDATE: out of bounds read in exif_process_IFD_in_MAKERNOTE
+    - debian/patches/CVE-2016-6291.patch: add more bounds checks to
+      ext/exif/exif.c. 
+    - CVE-2016-6291
+  * SECURITY UPDATE: NULL pointer dereference in exif_process_user_comment
+    - debian/patches/CVE-2016-6292.patch: properly handle encoding in
+      ext/exif/exif.c.
+    - CVE-2016-6292
+  * SECURITY UPDATE: locale_accept_from_http out-of-bounds access
+    - debian/patches/CVE-2016-6294.patch: check length in
+      ext/intl/locale/locale_methods.c, added test to
+      ext/intl/tests/bug72533.phpt.
+    - CVE-2016-6294
+  * SECURITY UPDATE: use after free vulnerability in SNMP with GC and
+    unserialize()
+    - debian/patches/CVE-2016-6295.patch: add new handler to
+      ext/snmp/snmp.c, add test to ext/snmp/tests/bug72479.phpt.
+    - CVE-2016-6295
+  * SECURITY UPDATE: heap buffer overflow in simplestring_addn
+    - debian/patches/CVE-2016-6296.patch: prevent overflows in
+      ext/xmlrpc/libxmlrpc/simplestring.*.
+    - CVE-2016-6296
+  * SECURITY UPDATE: integer overflow in php_stream_zip_opener
+    - debian/patches/CVE-2016-6297.patch: use size_t in
+      ext/zip/zip_stream.c.
+    - CVE-2016-6297
+  * debian/patches/fix_exif_tests.patch: fix exif test results after
+    security changes.
+
+ -- Marc Deslauriers <marc.deslauriers@ubuntu.com>  Wed, 27 Jul 2016 11:22:49 -0400
+
+php7.0 (7.0.8-0ubuntu0.16.04.1) xenial; urgency=medium
+
+  * New upstream release
+    - Closes LP: #1596578
+      + Fixed in upstream 7.0.6.
+    - Drop the following patches:
+      + 0035-Fixed-bug-63171-script-hangs-if-odbc-call-during-tim.patch
+        [ Fixed in upstream 7.0.6 ]
+      + 0046-Fix-ODBC-bug-for-varchars-returning-with-length-zero.patch
+        [ Fixed in upstream 7.0.6 ]
+      + 0047-make-opcache-lockfile-path-configurable.patch
+        [ Fixed in upstream 7.0.6 ]
+      + 0048-Fix-bug-71659.patch
+        [ Fixed in upstream 7.0.5 ]
+      + 0050-Fix-use-of-UNDEF-instead-of-NULL-in-read_dimension.patch
+        [ Fixed in upstream 7.0.6 ]
+      + 0051-backport-89a43425.patch
+        [ Fixed in upstream 7.0.5 ]
+      + 0052-backport-186844be.patch
+        [ Fixed in upstream 7.0.5 ]
+      + CVE-2015-8865-1.patch
+        [ Fixed in upstream 7.0.5 ]
+      + CVE-2015-8865-2.patch
+        [ Fixed in upstream 7.0.5 ]
+      + CVE-2016-3078.patch
+        [ Fixed in upstream 7.0.6 ]
+      + CVE-2016-3132.patch
+        [ Fixed in upstream 7.0.6 ]
+      + CVE-2016-4070.patch
+        [ Fixed in upstream 7.0.5 ]
+      + CVE-2016-4071.patch
+        [ Fixed in upstream 7.0.5 ]
+      + CVE-2016-4072.patch
+        [ Fixed in upstream 7.0.5 ]
+      + CVE-2016-4073.patch
+        [ Fixed in upstream 7.0.5 ]
+      + CVE-2016-4537.patch
+        [ Fixed in upstream 7.0.7 ]
+      + CVE-2016-4539.patch
+        [ Fixed in upstream 7.0.7 ]
+      + CVE-2016-4540.patch     
+        [ Fixed in upstream 7.0.7 ]
+      + CVE-2016-4542.patch
+        [ Fixed in upstream 7.0.7 ]
+  * Backport from Debian 7.0.6-7: 'Remove php-gettext from phpX.Y-common
+    provides as it clashes with existing package (Closes #823815)'
+    (LP: #1569128).
+  * Backport from Debian 7.0.6-8: 'Restore dba extension package'
+    (LP: #1595215).
+  * Regenerate d/control.
+
+ -- Nishanth Aravamudan <nish.aravamudan@canonical.com>  Mon, 20 Jun 2016 15:38:14 -0700
+
+php7.0 (7.0.4-7ubuntu2.1) xenial-security; urgency=medium
+
+  * SECURITY UPDATE: buffer over-write in finfo_open with malformed magic
+    file
+    - debian/patches/CVE-2015-8665-1.patch: properly calculate length in
+      ext/fileinfo/libmagic/funcs.c, added test to
+      ext/fileinfo/tests/bug71527.*.
+    - debian/patches/CVE-2015-8665-2.patch: fix test in
+      ext/fileinfo/tests/bug68996.phpt.
+    - CVE-2015-8665
+  * SECURITY UPDATE: integer overflow in ZipArchive::getFrom*
+    - debian/patches/CVE-2016-3078.patch: use zend_string_safe_alloc in
+      ext/zip/php_zip.c.
+    - CVE-2016-3078
+  * SECURITY UPDATE: double-free via SplDoublyLinkedList::offsetSet and
+    invalid index
+    - debian/patches/CVE-2016-3132.patch: remove extra free in
+      ext/spl/spl_dllist.c, added test to ext/spl/tests/bug71735.phpt.
+    - CVE-2016-3132
+  * SECURITY UPDATE: integer overflow in php_raw_url_encode
+    - debian/patches/CVE-2016-4070.patch: use size_t in ext/standard/url.c.
+    - CVE-2016-4070
+  * SECURITY UPDATE: php_snmp_error() format string Vulnerability
+    - debian/patches/CVE-2016-4071.patch: use format string in
+      ext/snmp/snmp.c.
+    - CVE-2016-4071
+  * SECURITY UPDATE: invalid memory write in phar on filename containing
+    NULL
+    - debian/patches/CVE-2016-4072.patch: require valid paths in
+      ext/phar/phar.c, ext/phar/phar_object.c, fix tests in
+      ext/phar/tests/badparameters.phpt,
+      ext/phar/tests/bug64931/bug64931.phpt,
+      ext/phar/tests/create_path_error.phpt,
+      ext/phar/tests/phar_extract.phpt,
+      ext/phar/tests/phar_isvalidpharfilename.phpt,
+      ext/phar/tests/phar_unlinkarchive.phpt,
+      ext/phar/tests/pharfileinfo_construct.phpt.
+    - CVE-2016-4072
+  * SECURITY UPDATE: invalid negative size in mbfl_strcut
+    - debian/patches/CVE-2016-4073.patch: fix length checks in
+      ext/mbstring/libmbfl/mbfl/mbfilter.c.
+    - CVE-2016-4073
+  * SECURITY UPDATE: bcpowmod accepts negative scale and corrupts _one_
+    definition
+    - debian/patches/CVE-2016-4537.patch: properly detect scale in
+      ext/bcmath/bcmath.c, add test to ext/bcmath/tests/bug72093.phpt.
+    - CVE-2016-4537
+    - CVE-2016-4538
+  * SECURITY UPDATE: xml_parse_into_struct segmentation fault
+    - debian/patches/CVE-2016-4539.patch: check parser->level in
+      ext/xml/xml.c, added test to ext/xml/tests/bug72099.phpt.
+    - CVE-2016-4539
+  * SECURITY UPDATE: out-of-bounds reads in zif_grapheme_stripos and
+    zif_grapheme_strpos with negative offset
+    - debian/patches/CVE-2016-4540.patch: check bounds in
+      ext/intl/grapheme/grapheme_string.c, added test to
+      ext/intl/tests/bug72061.phpt.
+    - CVE-2016-4540
+    - CVE-2016-4541
+  * SECURITY UPDATE: out of bounds heap read access in exif header
+    processing
+    - debian/patches/CVE-2016-4542.patch: check sizes and length in
+      ext/exif/exif.c.
+    - CVE-2016-4542
+    - CVE-2016-4543
+    - CVE-2016-4544
+  * Re-enable test suite
+    - debian/rules, debian/setup-mysql.sh: updated for new MySQL version
+      and new layout.
+
+ -- Marc Deslauriers <marc.deslauriers@ubuntu.com>  Thu, 19 May 2016 11:04:26 -0400
+
+php7.0 (7.0.4-7ubuntu2) xenial; urgency=medium
+
+  * debian/patches/0052-backport-186844be.patch: Fix bug #71695: Global
+    variables are resreved before execution.  Closes LP: #1569509.
+
+ -- Nishanth Aravamudan <nish.aravamudan@canonical.com>  Wed, 13 Apr 2016 12:45:21 -0700
+
+php7.0 (7.0.4-7ubuntu1) xenial; urgency=medium
+
+  * Merge with Debian unstable (LP: #1567158). Remaining changes:
+    - debian/patches/0051-backport-89a43425.patch: Fix incompatible
+      pointers on 64-bit.  Closes LP #1558201.
+  * Drop:
+    - Add support for independent source packages php7.0 and
+      php7.0-universe-source (LP #1555843):
+    - d/control{,.in}: drop Build-Depends on firebird-dev, libc-client-dev,
+      libmcrypt-dev, libonig-dev, libqdbm-dev and libzip-dev.
+    - d/control: drop binary packages php7.0-imap, php7.0-interbase,
+      php7.0-mcrypt and php7.0-zip and their reverse dependencies.
+    - d/control{,.in}: add Build-Depends on dctrl-tools.
+    - d/rules.d/ext-interbase.mk: add pdo config to interbase's
+      config, as php7.0-universe-common will not use ext-common.mk.
+    - d/control{,.in}: switch Build-Depends of netcat-traditional to
+      netcat-openbsd as only the latter is in main.
+    - d/rules: do not generate debian/tests/control when building for
+      universe.
+    - d/rules: use grep-dctrl to remove binary packages not generated by
+      this source package during the build (dpkg-genchanges complains
+      otherwise).
+    - php7.0-interbase: Do not install pdo.so, as it is provided
+      by php7.0-common (LP #1556486).
+      [ Xenial now supports building packages in main with universe
+        build-deps ]
+    - debian/patches/0048-fix-bug-71659-pcre-segfault-in-twig-tests.patch:
+      Replace bump regex with calculate_unit_length().  Closes LP:
+      #1548442.
+      [ merged in Debian ]
+  * d/t/control{,.in}: add dependency on wget
+
+ -- Nishanth Aravamudan <nish.aravamudan@canonical.com>  Thu, 07 Apr 2016 15:57:00 -0700
+
+php7.0 (7.0.4-7) unstable; urgency=medium
+
+  * Add upstart init script for backport reasons
+  * Add do_tmpfiles() call to php-fpm-checkconf to get consistent
+    behaviour in all init systems
+  * Fix use of UNDEF instead of NULL in read_dimension
+    (Courtesy of Nikita Popov)
+  * libphp-embed 'update-alternatives --remove' call needs to be in prerm
+    script
+  * Override maintainer-script-empty prerm in PHP extension packages
+  * apache2-module-depends-on-real-apache2-package lintian-override needs
+    to go in php-sapi.lintian-overrides to have any effect
+  * Move embedded library fileinfo lintian-override to
+    php-common.lintian-overrides.extra
+  * Add missing #EXTRA# to php-module.lintian-overrides template
+
+ -- Ondřej Surý <ondrej@debian.org>  Fri, 25 Mar 2016 17:25:41 +0100
+
+php7.0 (7.0.4-6) unstable; urgency=medium
+
+  * Add patch to fix segmentation fault in pcre running twig tests
+  * Register libphp@PHP_MAJOR@.so with update-alternatives, so there's no
+    dangling symbol in the piuparts
+  * Really expand $libdir and $datadir before AC_SUBST to allow passing
+    ${prefix} as part of --with-libdir
+  * Don't reset module provides at every dsoname, but at every module name
+  * Set PEAR_INSTALL_DIR manually to /usr/share/php even if we are not
+    building PEAR, so PEAR have correct paths
+
+ -- Ondřej Surý <ondrej@debian.org>  Mon, 14 Mar 2016 16:11:21 +0100
+
+php7.0 (7.0.4-5ubuntu2) xenial; urgency=medium
+
+  * debian/patches/0048-fix-bug-71659-pcre-segfault-in-twig-tests.patch:
+    Replace bump regex with calculate_unit_length().  Closes LP:
+    #1548442.
+  * debian/patches/0049-backport-89a43425.patch: Fix incompatible
+    pointers on 64-bit.  Closes LP: #1558201.
+
+ -- Nishanth Aravamudan <nish.aravamudan@canonical.com>  Wed, 16 Mar 2016 12:30:50 -0700
+
+php7.0 (7.0.4-5ubuntu1) xenial; urgency=medium
+
+  * Merge with Debian unstable (LP: #1553419). Remaining changes:
+    - Add support for independent source packages php7.0 and
+      php7.0-universe-source (LP #1555843):
+      + d/control{,.in}: drop Build-Depends on firebird-dev, libc-client-dev,
+        libmcrypt-dev, libonig-dev, libqdbm-dev and libzip-dev.
+      + d/control: drop binary packages php7.0-imap, php7.0-interbase,
+        php7.0-mcrypt and php7.0-zip and their reverse dependencies.
+      + d/control{,.in}: add Build-Depends on dctrl-tools.
+      + d/rules.d/ext-interbase.mk: add pdo config to interbase's
+        config, as php7.0-universe-common will not use ext-common.mk.
+    - d/control{,.in}: switch Build-Depends of netcat-traditional to
+      netcat-openbsd as only the latter is in main.
+    - d/rules: do not generate debian/tests/control when building for
+      universe.
+    - d/rules: use grep-dctrl to remove binary packages not generated by
+      this source package during the build (dpkg-genchanges complains
+      otherwise).
+  * Drop:
+    - d/rules: use grep{,-dctrl} to filter out makefile snippets and
+      binary packages that require universe.
+      [ Not present ]
+    - Undocumented changes to debian/control.
+      [ Prior merge churn]
+  * php7.0-interbase: Do not install pdo.so, as it is provided
+    by php7.0-common (LP: #1556486).
+
+ -- Nishanth Aravamudan <nish.aravamudan@canonical.com>  Mon, 14 Mar 2016 11:38:20 -0700
+
+php7.0 (7.0.4-5) unstable; urgency=medium
+
+  * Apply patch to make opcache lockfile path configurable
+    (Courtesy of Gandi)
+
+ -- Ondřej Surý <ondrej@debian.org>  Wed, 09 Mar 2016 12:27:40 +0100
+
+php7.0 (7.0.4-4) unstable; urgency=medium
+
+  * Also kill old /etc/php/mods-available/zlib.ini
+    (Closes: #817205, #817202)
+
+ -- Ondřej Surý <ondrej@debian.org>  Wed, 09 Mar 2016 10:08:25 +0100
+
+php7.0 (7.0.4-3) unstable; urgency=medium
+
+  * We need php_enable() in prerm script (Closes: #816763)
+  * Force ucf and ucfr de-registration of old config files
+  * ZLIB needs to be builtin module to support IMAGETYPE_SWC
+  * Remove zlib extension from the list of extensions
+  * php-common.preinst.extra was missing from d/prepare-files
+  * Remove debian/ prefix from @package@ in prepared-files
+
+ -- Ondřej Surý <ondrej@debian.org>  Mon, 07 Mar 2016 16:12:42 +0100
+
+php7.0 (7.0.4-2) unstable; urgency=medium
+
+  * Replace libvpx-dev with libwebp-dev in ext-gd.mk
+  * zlib extension needs to be enable as a module for all SAPIs to support
+    IMAGETYPE_SWC
+
+ -- Ondřej Surý <ondrej@debian.org>  Thu, 03 Mar 2016 20:52:13 +0100
+
+php7.0 (7.0.4-1) unstable; urgency=medium
+
+  * Imported Upstream version 7.0.4
+  * Remove two patches already present in upstream
+  * Rebase patches on top of 7.0.4 release
+  * Remove ucfq part from prerm and postrm script that's not needed
+    anymore (it was needed for dual mysql and mysqlnd modules)
+  * Move php module deactivation back to postrm remove block
+    (Closes: #816465)
+  * Reorder SAPI cleanup scripts to properly disable PHP extensions
+
+ -- Ondřej Surý <ondrej@debian.org>  Thu, 03 Mar 2016 11:41:57 +0100
+
+php7.0 (7.0.3-13) unstable; urgency=medium
+
+  * Check for old inidir existence before removing it (Closes: #816429)
+
+ -- Ondřej Surý <ondrej@debian.org>  Tue, 01 Mar 2016 21:32:09 +0100
+
+php7.0 (7.0.3-12) unstable; urgency=medium
+
+  * Turn comma into pipe to make fpm alternative to other web SAPIs
+
+ -- Ondřej Surý <ondrej@debian.org>  Tue, 01 Mar 2016 17:33:03 +0100
+
+php7.0 (7.0.3-11) unstable; urgency=medium
+
+  * Move mods-available directories to /etc/php/X.Y/mods-available
+  * Install missing php-module.preinst scripts
+
+ -- Ondřej Surý <ondrej@debian.org>  Mon, 29 Feb 2016 12:35:55 +0100
+
+php7.0 (7.0.3-10) unstable; urgency=medium
+
+  * Don't enable PHP FPM by default
+  * Fix non-expanded @EXTENSION_DIR@ in php-config
+
+ -- Ondřej Surý <ondrej@debian.org>  Fri, 26 Feb 2016 10:39:12 +0100
+
+php7.0 (7.0.3-9ubuntu2) xenial; urgency=medium
+
+  * Drop:
+    - Drop support for firebird, c-client, mcrypt, onig, qdbm and zip as
+      they are in universe (LP #1547245):
+      + d/control: drop binary packages php7.0-imap, php7.0-interbase,
+        php7.0-mcrypt and php7.0-zip and their reverse dependencies.
+      + d/rules.d: drop makefile snippets for imap, interbase, mcrypt
+        and zip extensions.
+  * Add support for independent source packages php7.0 and
+    php7.0-universe-source (LP: #1555843):
+    - php7.0-imap, php7.0-interbase, php7.0-mcrypt and php7.0-zip will
+      be provided by the latter, which will reside in universe.
+    - d/control{,.in}: add Build-Depends on dctrl-tools.
+    - d/control.in: drop Build-Depends on firebird-dev, libc-client-dev,
+      libmcrypt-dev, libonig-dev, libqdbm-dev and libzip-dev.
+    - d/rules: use grep{,-dctrl} to filter out makefile snippets and
+      binary packages that require universe.
+    - d/rules.d/ext-interbase.mk: add pdo config to interbase's config,
+      as php7.0-universe-common will not use ext-common.mk.
+  * d/control.in: switch Build-Depends of netcat-traditional to
+    netcat-openbsd as only the latter is in main.
+  * d/rules: do not generate debian/tests/control when building for
+    universe.
+  * d/rules: use grep-dctrl to remove binary packages not generated by
+    this source package during the build (dpkg-genchanges complains
+    otherwise).
+
+ -- Nishanth Aravamudan <nish.aravamudan@canonical.com>  Thu, 10 Mar 2016 15:40:59 -0800
+
+php7.0 (7.0.3-9ubuntu1) xenial; urgency=medium
+
+  * Merge with Debian unstable (LP: #1549407). Remaining changes:
+    - Drop support for firebird, c-client, mcrypt, onig, qdbm and zip as
+      they are in universe (LP #1547245):
+      + d/control: drop Build-Depends on firebird-dev, libc-client-dev,
+        libmcrypt-dev, libonig-dev, libqdbm-dev and libzip-dev.
+      + d/control: drop binary packages php7.0-imap, php7.0-interbase,
+        php7.0-mcrypt and php7.0-zip and their reverse dependencies.
+      + d/rules.d: drop makefile snippets for imap, interbase, mcrypt
+        and zip extensions.
+    - d/control: switch Build-Depends of netcat-traditional to
+      netcat-openbsd as only the latter is in main.
+
+ -- Nishanth Aravamudan <nish.aravamudan@canonical.com>  Wed, 24 Feb 2016 09:02:55 -0800
+
+php7.0 (7.0.3-9) unstable; urgency=medium
+
+  * Replace makefile magic with shell for loop when iterating through SAPI
+    build targets and enable parallel builds
+  * Enable full Debian hardening
+  * FORCE_CGI_REDIRECT and DISCARD_PATH doesn't exist anymore, so we just
+    hardlink php-cgi7.0 to /usr/lib/cgi-bin/ for consistency with older
+    releases
+  * Use shared config.cache between different SAPI builds that speeds up
+    dh_auto_configure step a lot
+
+ -- Ondřej Surý <ondrej@debian.org>  Wed, 24 Feb 2016 12:16:47 +0100
+
+php7.0 (7.0.3-8) unstable; urgency=medium
+
+  * Package zlib extension into phpX.Y-common
+
+ -- Ondřej Surý <ondrej@debian.org>  Tue, 23 Feb 2016 17:45:41 +0100
+
+php7.0 (7.0.3-7ubuntu1) xenial; urgency=medium
+
+  * Merge with Debian unstable. Remaining changes:
+    - Drop support for firebird, c-client, mcrypt, onig, qdbm and zip as
+      they are in universe (LP #1547245):
+      + d/control: drop Build-Depends on firebird-dev, libc-client-dev,
+        libmcrypt-dev, libonig-dev, libqdbm-dev, libxmlrpc-epi and
+        libzip-dev.
+      + d/control: drop binary packages php7.0-imap, php7.0-interbase,
+        php7.0-mcrypt and php7.0-xmlrpc and their reverse dependencies.
+      + d/rules.d: drop makefile snippets for imap, interbase, mcrypt
+        and xmlrpc extensions.
+    - d/control: switch Build-Depends of netcat-traditional to
+      netcat-openbsd as only the latter is in main.
+  * Dropped changes:
+    - Drop support for xmlrpc as it is in universe (LP #1547700):
+      + d/control: drop Build-Depends on libxmlrpc-epi
+      + d/control: drop binary package php7.0-xmlrpc and its reverse
+        dependencies.
+      + d/rules.d: drop makefile snippet for xmlrpc extension.
+    - d/rules: drop configuration of qdgm and zip.
+      + dropped in Debian.
+  * Drop support for zip as it is in universe (LP: #1547245).
+    - d/control: drop binary package php7.0-zip.
+    - d/rules.d: drop makefile snippet for zip extension.
+
+ -- Nishanth Aravamudan <nish.aravamudan@canonical.com>  Tue, 23 Feb 2016 15:02:28 -0800
+
+php7.0 (7.0.3-7) unstable; urgency=medium
+
+  * bz2 extension pulls libbz2-1.0, so it's better to have it in separate
+    package
+  * Remove PHPAPI version from lintian-overrides
+  * Get rid of ${source:Version} everywhere
+  * Add missing mysqlnd shared module back to phpX.Y-mysqlnd package
+  * Fix php7.0 source: not-binnmuable-all-depends-any php7.0 -> php7.0-common
+  * Merge php-<ext>:Provides into single line
+  * Rename @modules@ to @extensions@ to make the d/rules less confusing
+  * Disable module first before removing matching .ini file from
+    /etc/php/mods-available
+  * XML extension has to be loaded before WDDX or XMLRPC-EPI extensions
+
+ -- Ondřej Surý <ondrej@debian.org>  Tue, 23 Feb 2016 14:13:18 +0100
+
+php7.0 (7.0.3-6) unstable; urgency=medium
+
+  [ Ondřej Surý ]
+  * Add lintian override for faulty dh_apache2 (#796328)
+  * Add support for dbgsym package
+  * Use dsoname instead of module when building extension ini files
+    (Courtesy of Miha Vrhovnik)
+  * Move mysqlnd to mysql extension package
+  * Split several compiled-in extensions to independent extension packages
+  * Make several builtin extensions shared and move them into -common package
+  * Add support for generated Replaces/Breaks/Conflicts/Provides for
+    extension packages
+  * Add missing php_enable to php-fpm postinst script
+  * Disable built-in iconv support, leave only as shared extension
+
+  [ Neal Gompa ]
+  * Ensure php-fpm apache httpd config is prepared and installed
+  * Fix the tests to pass and handle conditions that should fail properly
+ 
+ -- Ondřej Surý <ondrej@debian.org>  Tue, 23 Feb 2016 07:49:00 +0100
+
+php7.0 (7.0.3-5ubuntu1) xenial; urgency=medium
+
+  * Drop support for firebird, c-client, mcrypt, onig, qdbm, xmlrpc and
+    zip as they are in universe (LP: #1547245):
+    - d/control: drop Build-Depends on firebird-dev, libc-client-dev,
+      libmcrypt-dev, libonig-dev, libqdbm-dev, libxmlrpc-epi and
+      libzip-dev.
+    - d/control: drop binary packages php7.0-imap, php7.0-interbase,
+      php7.0-mcrypt and php7.0-xmlrpc and their reverse dependencies.
+    - d/rules: drop configuration of qdgm and zip.
+    - d/rules.d: drop makefile snippets for imap, interbase, mcrypt and
+      xmlrpc extensions.
+  * d/control: switch Build-Depends of netcat-traditional to
+    netcat-openbsd as only the latter is in main.
+
+ -- Nishanth Aravamudan <nish.aravamudan@canonical.com>  Thu, 18 Feb 2016 16:11:00 -0800
+
+php7.0 (7.0.3-5) unstable; urgency=medium
+
+  [ Neal Gompa ]
+  * Add a test for php-fpm
+
+  [ Ondřej Surý ]
+  * Don't depend directly on apache2
+  * Add patch to fix crash because of VM stack corruption (DEB.SURY.ORG #246)
+  * Miscelaneous fixes related to off-tree ZTS builds
+
+ -- Ondřej Surý <ondrej@debian.org>  Wed, 17 Feb 2016 11:19:55 +0100
+
+php7.0 (7.0.3-4) unstable; urgency=medium
+
+  * Resolve ltmain.sh link based on libtool version (Closes: #814271)
+
+ -- Ondřej Surý <ondrej@debian.org>  Mon, 15 Feb 2016 12:41:07 +0100
+
+php7.0 (7.0.3-3) unstable; urgency=medium
+
+  [ Neal Gompa ]
+  * Update php-cgi apache httpd config for phpX.Y
+  * Add php-fpm apache httpd 2.4 configuration
+  * Enable shmop php module
+
+  [ Ondřej Surý ]
+  * The autopkgtests are now generated from templates in tests.in inside
+    debian/control rule
+  * Include pregenerated tests in the source package
+  * mod_phpX.c exports just major version in apache2 configuration
+
+ -- Ondřej Surý <ondrej@debian.org>  Mon, 08 Feb 2016 11:50:20 +0100
+
+php7.0 (7.0.3-2) unstable; urgency=medium
+
+  * Add generic support for ZTS builds
+  * Update systzdata patch to v13 and get php-bug62172.patch
+    (Courtesy of Remi Collet's repository)
+  * Remove extra 20-opcache.ini (Caused by fixed extension priority
+    handling in src:php-defaults)
+
+ -- Ondřej Surý <ondrej@debian.org>  Sat, 06 Feb 2016 15:27:55 +0100
+
+php7.0 (7.0.3-1) unstable; urgency=medium
+
+  * dh-php is unversioned
+  * Imported Upstream version 7.0.3
+  * Rebase patches on top of 7.0.3 release
+
+ -- Ondřej Surý <ondrej@debian.org>  Fri, 05 Feb 2016 10:51:15 +0100
+
+php7.0 (7.0.2-5) unstable; urgency=medium
+
+  * Cleanup enabled modules even if php maintscript helpers are no longer
+    installed (Closes: #807652, #810690)
+
+ -- Ondřej Surý <ondrej@debian.org>  Tue, 26 Jan 2016 10:19:20 +0100
+
+php7.0 (7.0.2-4) unstable; urgency=medium
+
+  * Unroll the update-alternatives loop in maintainer scripts
+  * Add versioned Depends on php@PHP_VERSION@-readline instead of
+    suggesting generic php-readline
+  * For versioned modules invoke versioned call to php(en|dis)mod from
+    maintainer scripts
+  * Each phpX.Y-<sapi> now Provides php-<sapi> to make php-pear
+    installable with src:php5.6
+
+ -- Ondřej Surý <ondrej@debian.org>  Fri, 22 Jan 2016 11:05:23 +0100
+
+php7.0 (7.0.2-3) unstable; urgency=medium
+
+  * Fail gracefully when other PHP module is enabled in Apache2 (Closes: #811005)
+
+ -- Ondřej Surý <ondrej@debian.org>  Fri, 15 Jan 2016 09:47:27 +0100
+
+php7.0 (7.0.2-2) unstable; urgency=medium
+
+  * Fix log path in logrotate script
+  * Merge patch for ODBC bug fix varchars returning with length zero
+  * Fix php-config showing the installed package names instead of the
+    SAPIs (Courtesy of Guillaume Plessis)
+
+ -- Ondřej Surý <ondrej@debian.org>  Thu, 14 Jan 2016 14:03:31 +0100
+
+php7.0 (7.0.2-1) unstable; urgency=medium
+
+  * Imported Upstream version 7.0.2
+  * Rebase patches on top of 7.0.2
+
+ -- Ondřej Surý <ondrej@debian.org>  Thu, 07 Jan 2016 16:05:30 +0100
+
+php7.0 (7.0.1-6) unstable; urgency=medium
+
+  * Add Conflicts: php5 stanza to php7.0.conf to hint a2enmod to not
+    enable both PHP 5 and PHP 7 modules (Closes: #810117)
+  * Build-Depend just on libpng-dev
+
+ -- Ondřej Surý <ondrej@debian.org>  Thu, 07 Jan 2016 10:46:12 +0100
+
+php7.0 (7.0.1-5) unstable; urgency=medium
+
+  * Prepare for src:php5 and src:php7.0 coinstallation
+  * Add empty php_enable to php-cgi postinst, so it's never enabled by default (Closes: #809967)
+
+ -- Ondřej Surý <ondrej@debian.org>  Tue, 05 Jan 2016 11:16:20 +0100
+
+php7.0 (7.0.1-4) unstable; urgency=medium
+
+  * Make Enchant, GMP and XSL extensions shared
+  * Regenerate d/control
+
+ -- Ondřej Surý <ondrej@debian.org>  Tue, 29 Dec 2015 14:12:09 +0100
+
+php7.0 (7.0.1-3) unstable; urgency=medium
+
+  * Compile with system PCRE library
+  * Don't conflict with src:php5 transitional dummy packages
+
+ -- Ondřej Surý <ondrej@debian.org>  Tue, 29 Dec 2015 09:49:46 +0100
+
+php7.0 (7.0.1-2) unstable; urgency=medium
+
+  * Remove phpX.Y-modules-source as it's not needed anymore  
+  * Put back libsystemd-dev [linux-any] | libsystemd-daemon-dev
+    [linux-any] into Build-Depends
+  * Move sessiondir handling to php-common package from src:php-defaults
+
+ -- Ondřej Surý <ondrej@debian.org>  Mon, 21 Dec 2015 11:08:53 +0100
+
+php7.0 (7.0.1-1) unstable; urgency=medium
+
+  * Enable XMLRPC-EPI extension
+  * Imported Upstream version 7.0.1
+  * Fix typo that prevented Interbase module to be built
+
+ -- Ondřej Surý <ondrej@debian.org>  Fri, 18 Dec 2015 09:32:47 +0100
+
+php7.0 (7.0.0-6) unstable; urgency=medium
+
+  * Only one sysvrc script can provide php-fpm
+  * Put both (5.x and 7.0) rules for FPM pools to one file with conditional
+  * Enable bz2 extension
+
+ -- Ondřej Surý <ondrej@debian.org>  Wed, 16 Dec 2015 13:04:46 +0100
+
+php7.0 (7.0.0-5) unstable; urgency=medium
+
+  * Re-enable mcrypt, readline and odbc extension
+  * Enable parallel builds in d/rules
+
+ -- Ondřej Surý <ondrej@debian.org>  Mon, 07 Dec 2015 18:09:46 +0100
+
+php7.0 (7.0.0-4) unstable; urgency=medium
+
+  * Add Replaces: php5-cli to php7.0-cli (Closes: #799711)
+
+ -- Ondřej Surý <ondrej@debian.org>  Mon, 07 Dec 2015 11:58:02 +0100
+
+php7.0 (7.0.0-3) unstable; urgency=medium
+
+  * Correctly set permissions on /var/lib/php/sessions (Closes: #807164)
+  * Fix fpm service reload via systemd (Closes: #807163)
+  * Update B-D to depend on libsystemd-dev | libsystemd-daemon-dev on
+    linux (Closes: #807266)
+
+ -- Ondřej Surý <ondrej@debian.org>  Mon, 07 Dec 2015 10:12:17 +0100
+
+php7.0 (7.0.0-2) unstable; urgency=medium
+
+  * Don't put $(INSTALL_ROOT) into phar.phar exec stanza (Closes: #807028)
+
+ -- Ondřej Surý <ondrej@debian.org>  Fri, 04 Dec 2015 15:54:10 +0100
+
+php7.0 (7.0.0-1) unstable; urgency=medium
+
+  * Update d/watch to match 7.0.*
+  * Imported Upstream version 7.0.0
+  * Rebase patches on top of 7.0.0 release
+
+ -- Ondřej Surý <ondrej@debian.org>  Fri, 04 Dec 2015 09:51:59 +0100
+
+php7.0 (7.0.0~rc8-3) experimental; urgency=medium
+
+  * Move JSON ext to separate mk file and a separate package again
+  * Re-enable Zend OpCache again and into a separate package
+
+ -- Ondřej Surý <ondrej@debian.org>  Mon, 30 Nov 2015 09:27:58 +0100
+
+php7.0 (7.0.0~rc8-2) experimental; urgency=medium
+
+  * Enable CLI for all SAPIs to fix php-config
+
+ -- Ondřej Surý <ondrej@debian.org>  Fri, 27 Nov 2015 10:50:57 +0100
+
+php7.0 (7.0.0~rc8-1) experimental; urgency=medium
+
+  * Imported Upstream version 7.0.0~rc8
+  * Remove GD patch as we build the gd extension inside the source tree now
+  * Build extensions as a part of the main PHP X.Y build tree
+
+ -- Ondřej Surý <ondrej@debian.org>  Wed, 25 Nov 2015 11:13:16 +0100
+
+php7.0 (7.0.0~rc6-1) experimental; urgency=medium
+
+  * Imported Upstream version 7.0.0~rc6
+  * Build extensions as a part of the main PHP build tree
+
+ -- Ondřej Surý <ondrej@debian.org>  Tue, 10 Nov 2015 15:45:44 +0100
+
+php7.0 (7.0.0~rc5-2) experimental; urgency=medium
+
+  * Pull v12 version of systzdata patch from Redhat and merge the
+    changes by Nikita Popov to stop the heap corruption
+  * Copyright of ext/date/lib/ has changed to MIT/Expat
+
+ -- Ondřej Surý <ondrej@debian.org>  Sun, 18 Oct 2015 02:17:02 +0200
+
+php7.0 (7.0.0~rc5-1) experimental; urgency=medium
+
+  * Imported Upstream version 7.0.0~rc5
+  * Refresh patches on top of PHP 7.0.0~rc5
+  * Bump phpapi to 20151012
+
+ -- Ondřej Surý <ondrej@debian.org>  Fri, 16 Oct 2015 16:51:39 +0200
+
+php7.0 (7.0.0~rc4-1) experimental; urgency=medium
+
+  * Fix reading group from tmpfiles configuration
+  * Imported Upstream version 7.0.0~rc4
+  * Rebase patches on top of PHP 7.0.0~rc5
+
+ -- Ondřej Surý <ondrej@debian.org>  Sun, 04 Oct 2015 16:24:14 +0200
+
+php7.0 (7.0.0~rc3-3) experimental; urgency=medium
+
+  * phar is just a symlink to phar.phar, so it needs special handling
+    (GH#120)
+
+ -- Ondřej Surý <ondrej@debian.org>  Thu, 24 Sep 2015 09:39:42 +0200
+
+php7.0 (7.0.0~rc3-2) experimental; urgency=medium
+
+  * Declare Conflict on old *php5* binary packages as appropriate
+    (Closes: #799711)
+  * Make phar binaries and manpages versioned again
+
+ -- Ondřej Surý <ondrej@debian.org>  Wed, 23 Sep 2015 10:16:27 +0200
+
+php7.0 (7.0.0~rc3-1) experimental; urgency=medium
+
+  * Imported Upstream version 7.0.0~rc3
+  * Rebase patches on top of 7.0.0~rc3 release
+  * Fix a wrong order of php and version in php7.0-cgi.postinst
+    (Closes: #799424)
+
+ -- Ondřej Surý <ondrej@debian.org>  Fri, 18 Sep 2015 09:52:29 +0200
+
+php7.0 (7.0.0~rc2-2) experimental; urgency=medium
+
+  * Include local config.h in gd_compat.c to make gd_compat.c work
+    properly when built outside of PHP tree (gh#111)
+
+ -- Ondřej Surý <ondrej@debian.org>  Mon, 07 Sep 2015 13:26:14 +0200
+
+php7.0 (7.0.0~rc2-1) experimental; urgency=medium
+
+  * Explicitly enable iconv extension
+  * Imported Upstream version 7.0.0~rc2
+  * Rebase patches on top of 7.0.0~rc2 release
+  * Fix compiled-in include_path (gh#112)
+
+ -- Ondřej Surý <ondrej@debian.org>  Mon, 07 Sep 2015 12:40:17 +0200
+
+php7.0 (7.0.0~rc1-1) experimental; urgency=medium
+
+  [ Murukesh Mohanan ]
+  * changes for common debian/; some minor fixes
+
+  [ Ondřej Surý ]
+  * Imported Upstream version 7.0.0~rc1
+  * Refresh patches on top of 7.0.0~rc1 release
+
+ -- Ondřej Surý <ondrej@debian.org>  Tue, 25 Aug 2015 14:19:59 +0200
+
+php7.0 (7.0.0~beta3-5) experimental; urgency=medium
+
+  * s/PHP_MAJOR_VERSION/PHP_MAJOR/ in apache2 .load file
+  * The apache2-maintscript-helper function is called just as php_enable()
+
+ -- Ondřej Surý <ondrej@debian.org>  Sun, 16 Aug 2015 14:42:02 +0200
+
+php7.0 (7.0.0~beta3-4) experimental; urgency=medium
+
+  * Fix the Apache2 module load script
+
+ -- Ondřej Surý <ondrej@debian.org>  Sun, 16 Aug 2015 10:20:20 +0200
+
+php7.0 (7.0.0~beta3-3) experimental; urgency=medium
+
+  * Add missing stdin redirection that got php-fpm init script stuck
+
+ -- Ondřej Surý <ondrej@debian.org>  Sun, 16 Aug 2015 10:16:58 +0200
+
+php7.0 (7.0.0~beta3-2) experimental; urgency=medium
+
+  * QDBM cannot be combined with GDBM
+  * Disable system libzip (perhaps it will fix compilation issue on trusty)
+  * Enable gettext, openssl and sockets extensions
+
+ -- Ondřej Surý <ondrej@debian.org>  Thu, 13 Aug 2015 09:59:44 +0200
+
+php7.0 (7.0.0~beta3-1) experimental; urgency=medium
+
+  * Fix source package name in d/NEWS
+  * Re-enable various base extensions back into core SAPIs
+  * Disable xmlrpc as the build is broken
+  * Install phar.phar (FIXME - add versioned phar.phar instead of single one)
+  * Imported Upstream version 7.0.0~beta3
+  * Refresh patches for PHP 7.0.0~beta3
+
+ -- Ondřej Surý <ondrej@debian.org>  Mon, 10 Aug 2015 13:01:34 +0200
+
+php7.0 (7.0.0~beta2-7) experimental; urgency=medium
+
+  * Reorder overriden rules in dh_install so .default files are mangled
+    and removed before dh_install run
+
+ -- Ondřej Surý <ondrej@debian.org>  Mon, 03 Aug 2015 09:02:36 +0200
+
+php7.0 (7.0.0~beta2-6) experimental; urgency=medium
+
+  * Enable libxml support since php-modules require php_libxml.h headers
+
+ -- Ondřej Surý <ondrej@debian.org>  Mon, 03 Aug 2015 08:57:49 +0200
+
+php7.0 (7.0.0~beta2-5) experimental; urgency=medium
+
+  * The include path in php-fpm was missing spaces around =
+  * Use correct source files (and remove them after mangling them) for
+    PHP-FPM configuration files
+
+ -- Ondřej Surý <ondrej@debian.org>  Mon, 03 Aug 2015 08:34:02 +0200
+
+php7.0 (7.0.0~beta2-4) experimental; urgency=medium
+
+  * Use proper name for php-fpm process, it's php-fpm@PHP_VERSION@
+
+ -- Ondřej Surý <ondrej@debian.org>  Mon, 03 Aug 2015 08:22:34 +0200
+
+php7.0 (7.0.0~beta2-3) experimental; urgency=medium
+
+  * Disable PEAR building (that removes phar.phar as well)
+  * Add patch to fix build on trusty i386 (Courtesy of ab@php.net)
+
+ -- Ondřej Surý <ondrej@debian.org>  Sun, 02 Aug 2015 11:27:22 +0200
+
+php7.0 (7.0.0~beta2-2) experimental; urgency=medium
+
+  * Properly install new FPM www.conf to pool.d
+  * Make use of tmpfiles (and add naive parser to phpX.Y-fpm.init)
+  * Disable all extensions with --disable-all and remove the various
+    configure options related to disabling the extensions
+
+ -- Ondřej Surý <ondrej@debian.org>  Fri, 31 Jul 2015 14:08:17 +0200
+
+php7.0 (7.0.0~beta2-1) experimental; urgency=medium
+
+  * Initial packaging of PHP 7.0 - DON'T USE IN PRODUCTION
+  * Imported Upstream version 7.0.0~beta2
+  * Rebased patches on top of 7.0.0~beta2
+  * Introduces complete rewrite of PHP packaging, so it might break horribly
+  * Don't compile the PHP modules from this source package, but create
+    phpX.Y-modules-source (Thanks Adam Conrad for the idea) that could be
+    used to compiled modules from php-modules source package
+  * Disable most compiled in modules except PDO, MySQLnd and OpenSSL
+  * Move phpenmod, phpquery, php-maintscript-helper and sessionclean
+    to php-common package
+  * Make the copyright machine readable (it might not be complete, but
+    it's much better than we have now in src:php5)
+  * Add d/NEWS with prominent experimental notices
+  * Use update-alternatives for phpdbg
+  * Remove W3C validation icon from FPM status page to prevent privacy breach
+  * cli SAPI has to be last target, so we get the right binary
+  * Use parallel just for build targets
+  * Fix binNMUability after switching phpX.Y-common to arch:all
+  * Update lintian overrides for libphpX.Y-embed
+  * Strip down the Build-Depends needed to build modules before
+  * Tweak the dirs in d/patches to include 7.0 instead of 5 <- needs to be
+    set from d/rules (FIXME)
+
+ -- Ondřej Surý <ondrej@debian.org>  Thu, 30 Jul 2015 11:39:57 +0200

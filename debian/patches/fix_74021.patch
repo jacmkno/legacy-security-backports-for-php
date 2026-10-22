@@ -1,0 +1,117 @@
+Description: Fix fetch_array with more than MEDIUMBLOB
+Author: andrewnester <andrew.nester.dev@gmail.com>
+Origin: upstream, http://git.php.net/?p=php-src.git;a=patch;h=01c1afa79f614fe8376e73f4e73f392160923745
+Bug: https://bugs.php.net/bug.php?id=74021
+Bug-Ubuntu: https://bugs.launchpad.net/bugs/1668017
+Forwarded: not-needed
+Last-Update: 2017-02-27
+
+--- php7.0-7.0.15.orig/NEWS
++++ php7.0-7.0.15/NEWS
+@@ -124,6 +124,10 @@ PHP
+   . Fixed bug #73448 (odbc_errormsg returns trash, always 513 bytes).
+     (Anatol)
+ 
++- Mysqlnd:
++  . Fixed bug #74021 (fetch_array broken data. Data more then MEDIUMBLOB).
++    (Andrew Nester, Nikita)
++
+ - Opcache:
+   . Fixed bug #69090 (check cached files permissions). (dmitry)
+   . Fixed bug #73546 (Logging for opcache has an empty file name). (mhagstrand)
+--- /dev/null
++++ php7.0-7.0.15/ext/mysqli/tests/bug73800.phpt
+@@ -0,0 +1,27 @@
++--TEST--
++Bug #73800 (sporadic segfault with MYSQLI_OPT_INT_AND_FLOAT_NATIVE)
++--SKIPIF--
++<?php
++require_once('skipif.inc');
++require_once('skipifconnectfailure.inc');
++if (PHP_INT_SIZE != 8) die('skip requires 64-bit');
++?>
++--FILE--
++<?php
++
++require_once("connect.inc");
++$link = my_mysqli_connect($host, $user, $passwd, $db, $port, $socket);
++
++$link->query('SET @@global.max_allowed_packet = 67108864');
++$link->close();
++
++$link = my_mysqli_connect($host, $user, $passwd, $db, $port, $socket);
++$link->options(MYSQLI_OPT_INT_AND_FLOAT_NATIVE, 1);
++
++$res = $link->query("SELECT RPAD('1',9000000,'1') as a,RPAD('1',9000000,'1') as b, 9223372036854775807 as c");
++$r = $res->fetch_array();
++
++var_dump($r['c']);
++?>
++--EXPECT--
++int(9223372036854775807)
+--- /dev/null
++++ php7.0-7.0.15/ext/mysqli/tests/bug74021.phpt
+@@ -0,0 +1,25 @@
++--TEST--
++Bug #74021 (fetch_array broken data. Data more then MEDIUMBLOB)
++--SKIPIF--
++<?php
++require_once('skipif.inc');
++require_once('skipifconnectfailure.inc');
++?>
++--FILE--
++<?php
++
++require_once("connect.inc");
++$link = my_mysqli_connect($host, $user, $passwd, $db, $port, $socket);
++
++$link->query('SET @@global.max_allowed_packet = 67108864');
++$link->close();
++
++$link = my_mysqli_connect($host, $user, $passwd, $db, $port, $socket);
++$res = $link->query("SELECT RPAD('1',9000000,'1') as a,RPAD('1',9000000,'1') as b");
++$r = $res->fetch_array();
++var_dump(md5($r['a']));
++var_dump(md5($r['b']));
++?>
++--EXPECT--
++string(32) "42ca0fd16ab6b6d4b9d47dc0a4a8b12a"
++string(32) "42ca0fd16ab6b6d4b9d47dc0a4a8b12a"
+--- php7.0-7.0.15.orig/ext/mysqlnd/mysqlnd_wireprotocol.c
++++ php7.0-7.0.15/ext/mysqlnd/mysqlnd_wireprotocol.c
+@@ -1458,7 +1458,7 @@ php_mysqlnd_read_row_ex(MYSQLND_CONN_DAT
+ 	  zero-length byte, don't read the body, there is no such.
+ 	*/
+ 	
+-	*data_size = prealloc_more_bytes;
++	*data_size = 0;
+ 	while (1) {
+ 		if (FAIL == mysqlnd_read_header(conn->net, &header, conn->stats, conn->error_info)) {
+ 			ret = FAIL;
+@@ -1469,7 +1469,8 @@ php_mysqlnd_read_row_ex(MYSQLND_CONN_DAT
+ 
+ 		if (first_iteration) {
+ 			first_iteration = FALSE;
+-			*buffer = result_set_memory_pool->get_chunk(result_set_memory_pool, *data_size);
++			*buffer = result_set_memory_pool->get_chunk(
++				result_set_memory_pool, *data_size + prealloc_more_bytes);
+ 			if (!*buffer) {
+ 				ret = FAIL;
+ 				break;
+@@ -1484,7 +1485,7 @@ php_mysqlnd_read_row_ex(MYSQLND_CONN_DAT
+ 			/*
+ 			  We have to realloc the buffer.
+ 			*/
+-			if (FAIL == (*buffer)->resize_chunk((*buffer), *data_size)) {
++			if (FAIL == (*buffer)->resize_chunk((*buffer), *data_size + prealloc_more_bytes)) {
+ 				SET_OOM_ERROR(*conn->error_info);
+ 				ret = FAIL;
+ 				break;
+@@ -1507,7 +1508,6 @@ php_mysqlnd_read_row_ex(MYSQLND_CONN_DAT
+ 		(*buffer)->free_chunk((*buffer));
+ 		*buffer = NULL;
+ 	}
+-	*data_size -= prealloc_more_bytes;
+ 	DBG_RETURN(ret);
+ }
+ /* }}} */
